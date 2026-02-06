@@ -1,5 +1,14 @@
 package com.mt.UMS.dto;
 
-public record ChangePasswordDto(String currentPassword, String newPassword, String confirmPassword) {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class ChangePasswordDto {
+    public String currentPassword;
+    public String newPassword;
+    public String confirmPassword;
 }

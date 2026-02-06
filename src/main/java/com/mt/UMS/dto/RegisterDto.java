@@ -8,16 +8,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
-        public Long id;
-        @NotBlank
-        @Size(min = 3, max = 50)
-        public String username;
-        @NotBlank
-        @Size(max = 70)
-        @Email
-        public String email;
+@AllArgsConstructor
+public class RegisterDto {
 
+    @NotBlank
+    private String username;
+
+    @NotBlank
+    @Email
+    private String email;
+
+    @NotBlank
+    @Size(min = 8, max = 15)
+    private String password;
 }
