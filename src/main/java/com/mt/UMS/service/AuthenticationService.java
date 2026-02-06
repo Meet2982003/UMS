@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import com.mt.UMS.dto.LoginRequestDto;
 import com.mt.UMS.dto.LoginResponseDto;
@@ -20,6 +21,7 @@ import com.mt.UMS.model.UserEntity;
 import com.mt.UMS.repository.UserRepository;
 import com.mt.UMS.utils.ConvertToDto;
 
+@Service
 public class AuthenticationService {
 
     @Autowired
@@ -27,6 +29,9 @@ public class AuthenticationService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JwtService jwtService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
