@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: UMS
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/UMS
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+jwt:
+  secret: oYEB00F2Ly90SOjfFs2S=T&qK&7^1WBY1DujenATNpw
+  expiration: 3600000
+
+server:
+  port: 6563
