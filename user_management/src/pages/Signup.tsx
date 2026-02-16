@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import authService from "../services/authService";
 
 const Signup = () => {
   const [error, setError] = useState("");
@@ -8,7 +9,24 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  setError("Signup failed");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    setError("");
+
+    if (password !== confirmPassword) {
+      setError("Password and confirm password does not match");
+      return;
+    }
+    try {
+      await authService.signupNormalUser(username, email, password);
+      navigate("/login");
+    } catch (error) {
+      setError("Signup failed. Please try again.");
+      console.error("Signup failed ", error);
+    }
+  };
 
   return (
     <div className="signup-container">

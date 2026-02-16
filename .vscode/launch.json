@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-UmsApplication<UMS>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.mt.UMS.UmsApplication",
+      "projectName": "UMS",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
