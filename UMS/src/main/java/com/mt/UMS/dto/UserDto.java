@@ -1,5 +1,7 @@
 package com.mt.UMS.dto;
 
+import java.util.Set;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -19,5 +21,7 @@ public class UserDto {
         @Size(max = 70)
         @Email
         public String email;
+
+        private Set<String> roles;
 
 }
