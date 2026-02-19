@@ -142,7 +142,60 @@ const authService = {
         catch(error){
             return false;
         }
+    },
+
+    updataProfile: async (userData : any)  =>{
+        try{
+            const response = await api.put(`/users/update-user/${userData.id}`,userData);
+            const currentUser = authService.getCurrentUser();
+            const updatedUser = {...currentUser,...response.data};
+            localStorage.setItem(`user`,JSON.stringify(updatedUser));
+        }
+        catch(error){
+            console.error("profile update failed",error);
+            throw error;
+        }
+    },
+    getAllUsers : async() =>{
+        try{
+            const response = await api.get(`/users/getAllusers`);
+            return response.data;
+        }
+        catch(error){
+            console.error("Failed to fetch users",error);
+            throw error;
+        }
+    },
+
+    deleteUserById: async(userId:any) =>{
+        try{
+            const response = await api.delete(`users/deleteById/${userId}`)
+            return response.data;
+        }
+        catch(error){
+            console.error("Failed to delete the user",error);
+            throw error;
+        }
+    },
+
+    changePassword: async(currentPassword : string,newPassword: string,confirmPassword: string) =>{
+        try{
+            const currentUser = authService.getCurrentUser();
+            if(!currentUser || currentUser.id){
+                throw new Error("User not found");
+            }
+        const response = await api.put(`/users/change-password/${currentUser.id}`,{
+            currentPassword,
+            newPassword,
+            confirmPassword
+        });
+            return response;
+        }
+        catch(error){
+            console.error("Failed to chnage the password",error)
+            throw error;
+        }
     }
 }
 
-export default authService;
+export {api,authService};

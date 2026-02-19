@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import authService from "../services/authService";
+import { authService } from "../services/authService";
 
 const ProtectedRoutes = ({ children }: any) => {
   const isAuthenticated = authService.isAuthenticated();
