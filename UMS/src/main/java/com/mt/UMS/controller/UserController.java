@@ -42,8 +42,9 @@ public class UserController {
         return ResponseEntity.ok(userService.updatePassword(id, chagePasswordDto));
     }
 
-    @PutMapping("/update-user")
+    @PutMapping("/update-user/{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
+        System.out.println(id);
         return ResponseEntity.ok(userService.updateUser(id, userDto));
     }
 

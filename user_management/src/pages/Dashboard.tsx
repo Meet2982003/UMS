@@ -7,13 +7,14 @@ import "../styles/Dashboard.css";
 type Role = "ROLE_ADMIN" | "ROLE_USER";
 
 interface User {
-  id: string;
+  id: number;
   username: string;
   email: string;
   roles: Role[];
 }
 
 interface EditedUser {
+  id: number;
   username: string;
   email: string;
 }
@@ -119,7 +120,7 @@ const UsersTable = (): JSX.Element => {
     fetchAllUsers();
   }, []);
 
-  const handleDeleteUser = async (userId: string) => {
+  const handleDeleteUser = async (userId: number) => {
     try {
       await authService.deleteUserById(userId);
       setAllUsers((prev) => prev.filter((user) => user.id !== userId));
@@ -174,6 +175,7 @@ const Dashboard = (): JSX.Element => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [editedUser, setEditedUser] = useState<EditedUser>({
+    id: null,
     username: "",
     email: "",
   });
@@ -186,6 +188,7 @@ const Dashboard = (): JSX.Element => {
         const currentUser: User = authService.getCurrentUser();
         setUser(currentUser);
         setEditedUser({
+          id: currentUser.id,
           username: currentUser.username,
           email: currentUser.email,
         });
@@ -213,7 +216,8 @@ const Dashboard = (): JSX.Element => {
 
   const handleSaveProfile = async () => {
     try {
-      await authService.updataProfile(editedUser);
+      console.log("user", editedUser);
+      await authService.updateProfile(editedUser);
       setUser((prev) => (prev ? { ...prev, ...editedUser } : prev));
       setIsEditing(false);
     } catch (error) {
@@ -223,7 +227,11 @@ const Dashboard = (): JSX.Element => {
 
   const handleCancelEdit = () => {
     if (user) {
-      setEditedUser({ username: user.username, email: user.email });
+      setEditedUser({
+        id: user.id,
+        username: user.username,
+        email: user.email,
+      });
     }
     setIsEditing(false);
   };

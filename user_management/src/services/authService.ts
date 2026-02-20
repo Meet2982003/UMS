@@ -7,7 +7,7 @@ const BASE_URL = "http://localhost:6563";
 const api = axios.create({
     baseURL : BASE_URL,
     headers : {
-        'Content-Type' : 'application/josn'
+        'Content-Type' : 'application/json'
     },
     withCredentials : true //important for handling cookies cors origin  
 });
@@ -144,7 +144,7 @@ const authService = {
         }
     },
 
-    updataProfile: async (userData : any)  =>{
+    updateProfile: async (userData : any)  =>{
         try{
             const response = await api.put(`/users/update-user/${userData.id}`,userData);
             const currentUser = authService.getCurrentUser();
@@ -156,6 +156,7 @@ const authService = {
             throw error;
         }
     },
+    
     getAllUsers : async() =>{
         try{
             const response = await api.get(`/users/getAllusers`);
